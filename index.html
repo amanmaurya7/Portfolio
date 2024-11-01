@@ -1,0 +1,585 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <link rel="icon" href="icone.png" type="image/jpeg">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Aman Maurya - Developer Portfolio</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=IBM+Plex+Mono:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;0,700;1,100;1,200;1,300;1,400;1,500;1,600;1,700&family=Source+Code+Pro:ital,wght@0,200..900;1,200..900&display=swap" rel="stylesheet">    
+    
+    <style>
+    
+    :root {
+            --primary: #00a2ff;
+            --secondary: #004400;
+            --bg: #000000;
+            --text: #ffffff;
+            --accent: #00aaaa;
+            --glow: 0 0 10px var(--primary);
+        }
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-weight:800;
+            font-family: 'Source Code Pro', monospace;
+        }
+
+        body {
+            background-color: var(--bg);
+            color: var(--text);
+            line-height: 1.6;
+            padding: 20px;
+            max-width: 1200px;
+            margin: 0 auto;
+            min-height: 100vh;
+            position: relative;
+            overflow-x: hidden;
+        }
+
+        body::before {
+            content: '';
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: repeating-linear-gradient(
+                0deg,
+                rgba(0, 255, 0, 0.03),
+                rgba(0, 255, 0, 0.03) 1px,
+                transparent 1px,
+                transparent 2px
+            );
+            pointer-events: none;
+            z-index: -1;
+        }
+
+        .ascii-art {
+            white-space: pre;
+            font-size: 14px;
+            text-align: center;
+            margin: 20px 0;
+            color: var(--primary);
+            text-shadow: var(--glow);
+            animation: pulse 2s infinite;
+            transition: all 0.3s ease;
+        }
+
+        @keyframes pulse {
+            0% { opacity: 0.8; }
+            50% { opacity: 1; }
+            100% { opacity: 0.8; }
+        }
+
+        .business-card {
+            border: 1px solid var(--accent);
+            padding: 30px;
+            margin: 40px 0;
+            text-align: center;
+            background-color: rgba(0, 20, 0, 0.3);
+            backdrop-filter: blur(5px);
+            border-radius: 5px;
+            position: relative;
+            overflow: hidden;
+            transition: all 0.3s ease;
+        }
+
+        .business-card::before {
+            content: '';
+            position: absolute;
+            top: -50%;
+            left: -50%;
+            width: 200%;
+            height: 200%;
+            background: linear-gradient(
+                45deg,
+                transparent,
+                rgba(0, 255, 0, 0.1),
+                transparent
+            );
+            transform: rotate(45deg);
+            animation: shine 3s infinite;
+        }
+
+        @keyframes shine {
+            0% { transform: translateX(-100%) rotate(45deg); }
+            100% { transform: translateX(100%) rotate(45deg); }
+        }
+
+        .business-card h1 {
+            font-size: 3em;
+            margin-bottom: 10px;
+            color: var(--primary);
+            text-shadow: var(--glow);
+        }
+
+        .section {
+            margin: 20px 0;
+            padding: 20px;
+            border-left: 2px solid var(--accent);
+            display: none;
+            background: rgba(0, 20, 0, 0.2);
+            border-radius: 5px;
+        }
+
+        .section.active {
+            display: block;
+            animation: slideIn 0.5s ease-out;
+        }
+
+        @keyframes slideIn {
+            from {
+                transform: translateX(-20px);
+                opacity: 0;
+            }
+            to {
+                transform: translateX(0);
+                opacity: 1;
+            }
+        }
+
+        .nav-container {
+            text-align: center;
+            margin: 30px 0;
+            padding: 15px;
+            background: rgba(0, 20, 0, 0.3);
+            border-radius: 5px;
+            backdrop-filter: blur(5px);
+        }
+
+        .nav-link {
+            color: var(--primary);
+            text-decoration: none;
+            margin: 0 15px;
+            padding: 8px 15px;
+            cursor: pointer;
+            position: relative;
+            display: inline-block;
+            transition: all 0.3s ease;
+            border: 1px solid transparent;
+        }
+
+        .nav-link:hover {
+            color: var(--text);
+            border: 1px solid var(--accent);
+            border-radius: 3px;
+            box-shadow: var(--glow);
+        }
+
+        .timeline {
+            margin: 20px 0;
+        }
+
+        .timeline-item {
+            margin: 15px 0;
+            padding: 15px;
+            position: relative;
+            border-left: 2px solid var(--accent);
+            transition: all 0.3s ease;
+            background: rgba(0, 20, 0, 0.2);
+            border-radius: 3px;
+        }
+
+        .timeline-item:hover {
+            transform: translateX(10px);
+            background: rgba(0, 40, 0, 0.3);
+        }
+
+        .timeline-item::before {
+            content: '>';
+            position: absolute;
+            left: -20px;
+            color: var(--primary);
+            animation: blink 1s infinite;
+        }
+
+        @keyframes blink {
+            0%, 100% { opacity: 1; }
+            50% { opacity: 0; }
+        }
+
+        .contact-info {
+            display: flex;
+            justify-content: center;
+            gap: 30px;
+            flex-wrap: wrap;
+            margin: 20px 0;
+        }
+
+        .contact-info span {
+            padding: 8px 15px;
+            background: rgba(0, 20, 0, 0.3);
+            border-radius: 3px;
+            transition: all 0.3s ease;
+        }
+
+        .contact-info span:hover {
+            background: rgba(0, 40, 0, 0.4);
+            transform: translateY(-2px);
+        }
+
+        .project-item {
+            margin: 20px 0;
+            padding: 20px;
+            border: 1px solid var(--accent);
+            background: rgba(0, 20, 0, 0.2);
+            border-radius: 5px;
+            transition: all 0.3s ease;
+        }
+
+        .project-item:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 5px 15px rgba(0, 255, 0, 0.1);
+        }
+
+        .project-item h3 {
+            color: var(--primary);
+            margin-bottom: 10px;
+        }
+
+        .skills-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 20px;
+            margin-top: 20px;
+        }
+
+        .skill-category {
+            background: rgba(0, 20, 0, 0.2);
+            padding: 15px;
+            border-radius: 5px;
+            border: 1px solid var(--accent);
+        }
+
+        .skill-category h3 {
+            color: var(--primary);
+            margin-bottom: 10px;
+            font-size: 1.2em;
+        }
+
+        .skill-list {
+            list-style: none;
+        }
+
+        .skill-list li {
+            margin: 5px 0;
+            padding-left: 20px;
+            position: relative;
+        }
+
+        .skill-list li::before {
+            content: '>';
+            position: absolute;
+            left: 0;
+            color: var(--primary);
+        }
+
+        .terminal-prompt::before {
+            content: '$ ';
+            color: var(--primary);
+        }
+
+        .achievements-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 20px;
+        }
+
+        .achievement-card {
+            background: rgba(0, 20, 0, 0.2);
+            padding: 20px;
+            border-radius: 5px;
+            border: 1px solid var(--accent);
+            transition: all 0.3s ease;
+        }
+
+        .achievement-card:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 5px 15px rgba(0, 255, 0, 0.1);
+        }
+
+        .achievement-card h3 {
+            color: var(--primary);
+            margin-bottom: 10px;
+        }
+
+        @media (max-width: 768px) {
+            .ascii-art {
+                font-size: 8px;
+            }
+
+            .nav-link {
+                display: block;
+                margin: 10px 0;
+            }
+
+            .contact-info {
+                flex-direction: column;
+                align-items: center;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="ascii-art">
+    █████╗ ███╗   ███╗ █████╗ ███╗   ██╗    ███╗   ███╗ █████╗ ██╗   ██╗██████╗ ██╗   ██╗ █████╗ 
+   ██╔══██╗████╗ ████║██╔══██╗████╗  ██║    ████╗ ████║██╔══██╗██║   ██║██╔══██╗╚██╗ ██╔╝██╔══██╗
+   ███████║██╔████╔██║███████║██╔██╗ ██║    ██╔████╔██║███████║██║   ██║██████╔╝ ╚████╔╝ ███████║
+   ██╔══██║██║╚██╔╝██║██╔══██║██║╚██╗██║    ██║╚██╔╝██║██╔══██║██║   ██║██╔══██╗  ╚██╔╝  ██╔══██║
+   ██║  ██║██║ ╚═╝ ██║██║  ██║██║ ╚████║    ██║ ╚═╝ ██║██║  ██║╚██████╔╝██║  ██║   ██║   ██║  ██║
+   ╚═╝  ╚═╝╚═╝     ╚═╝╚═╝  ╚═╝╚═╝  ╚═══╝    ╚═╝     ╚═╝╚═╝  ╚═╝ ╚═════╝ ╚═╝  ╚═╝   ╚═╝   ╚═╝  ╚═╝
+    </div>
+
+    <div class="business-card">
+        <h1>Aman Maurya</h1>
+        <p class="terminal-prompt">Software Developer | Backend Developer | React Native Developer</p>
+        <div class="contact-info">
+            <span>📍 Mumbai, India</span>
+            <span>📧 amanmaurya.me@gmail.com</span>
+            <span>🔗 <a href="https://www.linkedin.com/in/amanmaurya-me" target="_blank" style="color: var(--primary); text-decoration: none;">LinkedIn</a></span>
+        </div>
+    </div>
+
+    <div class="nav-container">
+        <a class="nav-link" onclick="showSection('about')">💻 About Me</a>
+        <a class="nav-link" onclick="showSection('skills')">🛠 Skills</a>
+        <a class="nav-link" onclick="showSection('projects')">📂 Projects</a>
+        <a class="nav-link" onclick="showSection('achievements')">🏆 Achievements</a>
+    </div>
+
+    <div id="about" class="section">
+        <h2 class="terminal-prompt">About Me</h2>
+        <p>B.E. in Information Technology student at University of Mumbai with a strong foundation in software development and cloud technologies. Currently pursuing my degree with a GPA of 9.18/10.</p>
+        <p>Passionate about creating innovative solutions and exploring new technologies in the realm of software development.</p>
+    </div>
+
+    <div id="skills" class="section">
+        <h2 class="terminal-prompt">Technical Skills</h2>
+        <div class="skills-grid">
+            <div class="skill-category">
+                <h3>Cloud & Infrastructure</h3>
+                <ul class="skill-list">
+                    <li>AWS</li>
+                    <li>Kubernetes</li>
+                    <li>Docker</li>
+                </ul>
+            </div>
+            <div class="skill-category">
+                <h3>Web & App Development</h3>
+                <ul class="skill-list">
+                    <li>React Native</li>
+                    <li>NEXTJS</li>
+                    <li>NodeJS</li>
+                </ul>
+            </div>
+            <div class="skill-category">
+                <h3>Languages</h3>
+                <ul class="skill-list">
+                    <li>Java</li>
+                    <li>Go</li>
+                </ul>
+            </div>
+            <div class="skill-category">
+                <h3>Databases</h3>
+                <ul class="skill-list">
+                    <li>PostgreSQL</li>
+                    <li>MongoDB</li>
+                </ul>
+            </div>
+        </div>
+    </div>
+
+    <div id="projects" class="section">
+        <h2 class="terminal-prompt">Featured Projects</h2>
+        <div class="project-item">
+            <h3>CRM Mobile Application</h3>
+            <p>Currently developing a comprehensive Customer Relationship Management (CRM) mobile application using React Native. The app features contact management, task tracking, and services pipeline visualization.</p>
+        </br>
+            <p><strong>Tech Stack:</strong> React Native, Redux, Node.js, MongoDB</p>
+            <p><strong>Timeline:</strong> November 2024 – Present</p>
+        </div>
+        <div class="project-item">
+            <h3>REST API using Golang</h3>
+            <p>A robust REST API built with Golang, providing efficient and scalable backend services for a MERN stack application.</p>
+        </br>
+            <p><strong>Tech Stack:</strong> Golang, MongoDB, Express, React, Node.js</p>
+            <p><strong>Timeline:</strong> October 2024</p>
+            <div class="project-buttons">
+            <a href="https://github.com/yourusername/rest-api-golang" target="_blank" class="nav-link">GitHub</a>
+            </div>
+        </div>
+        <div class="project-item">
+            <h3>Daily Expenses Sharing App</h3>
+            <p>This is a simple backend service that helps manage daily expenses and makes splitting bills with friends or roommates easier. Built with Node.js, Express, and MongoDB, it offers a convenient way to track spending and share costs.</p>
+        </br>
+            <p><strong>Tech Stack:</strong> Node.js, Express, MongoDB</p>
+            <p><strong>Timeline:</strong> October 2024</p>
+            <div class="project-buttons">
+            <a href="https://github.com/amanmaurya7/Expense-Sharing.git" target="_blank" class="nav-link">GitHub</a>
+            </div>
+        </div>
+        <div class="project-item">
+            <h3>CoDoc: Collaborative Document Editing Redefined</h3>
+            <p>Synchronize Your Thoughts, Elevate Your Documents</p>
+            <p>CoDoc is a collaborative document editor that allows multiple users to create, edit, and manage documents in real-time. The platform ensures secure user authentication, provides suggestion features, and supports saving documents in various formats for offline access.</p>
+        </br>
+            <strong>Tech Stack:</strong> Next.js, Liveblocks</p>
+            <p><strong>Timeline:</strong> July 2024</p>
+            <div class="project-buttons">
+            <a href="https://github.com/amanmaurya7/codoc.git" target="_blank" class="nav-link">GitHub</a>
+            <a href="https://codoc.example.com" target="_blank" class="nav-link">Preview</a>
+            </div>
+        </div>
+    </div>
+    
+
+    <div id="achievements" class="section">
+        <h2 class="terminal-prompt">Achievements & Recognition</h2>
+        <div class="achievements-grid">
+            <div class="achievement-card">
+                <h3>🔬 Research Position</h3>
+                <p>Student Researcher</p>
+                <p>TCET Shashtra Coding Club</p>
+            </div>
+            <div class="achievement-card">
+                <h3>🎤 Speaking</h3>
+                <p>Featured Speaker</p>
+                <p>Solana Hacker Mumbai 2023</p>
+            </div>
+            <div class="achievement-card">
+                <h3>⭐ Technical Excellence</h3>
+                <p>5-star rating in Java Proficiency</p>
+                <p>Hackerrank Certification</p>
+            </div>
+            <div class="achievement-card">
+                <h3>🏅 Academic Excellence</h3>
+                <p>Winner of Techno-Fest</p>
+                <p>Best Student Award, IT Department</p>
+            </div>
+            <div class="achievement-card">
+                <h3>👨‍💼 Leadership</h3>
+                <p>Technical Head</p>
+                <p>Indian Society for Technical Education</p>
+            </div>
+            <div class="achievement-card">
+                <h3>🎯 Competitive Achievement</h3>
+                <p>Qualified for Round 2</p>
+                <p>National Engineering Olympiads</p>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        // Enhanced section transition with typing effect
+        function showSection(sectionId) {
+            // Hide all sections with fade out effect
+            document.querySelectorAll('.section').forEach(section => {
+                section.style.opacity = '0';
+                setTimeout(() => {
+                    section.classList.remove('active');
+                }, 300);
+            });
+            
+            // Show selected section with typing effect
+            setTimeout(() => {
+                const selectedSection = document.getElementById(sectionId);
+                selectedSection.classList.add('active');
+                selectedSection.style.opacity = '1';
+                
+                // Add terminal typing effect to headings
+                const heading = selectedSection.querySelector('h2');
+                const originalText = heading.textContent;
+                heading.textContent = '';
+                let i = 0;
+                
+                const typeText = () => {
+                    if (i < originalText.length) {
+                        heading.textContent += originalText.charAt(i);
+                        i++;
+                        setTimeout(typeText, 50);
+                    }
+                };
+                
+                typeText();
+            }, 300);
+            
+            // Update active nav link
+            document.querySelectorAll('.nav-link').forEach(link => {
+                link.style.borderColor = 'transparent';
+            });
+            event.target.style.borderColor = 'var(--accent)';
+        }
+
+        // Terminal cursor effect
+        const cursor = document.createElement('span');
+        cursor.textContent = '█';
+        cursor.style.animation = 'blink 1s infinite';
+        document.querySelector('.terminal-prompt').appendChild(cursor);
+
+        // Add hover effect to project items
+        document.querySelectorAll('.project-item').forEach(item => {
+            item.addEventListener('mouseenter', () => {
+                item.style.transform = 'translateY(-5px)';
+                item.style.boxShadow = '0 5px 15px rgba(0, 255, 0, 0.1)';
+            });
+            
+            item.addEventListener('mouseleave', () => {
+                item.style.transform = 'translateY(0)';
+                item.style.boxShadow = 'none';
+            });
+        });
+
+        // Matrix rain effect in background
+        const canvas = document.createElement('canvas');
+        canvas.style.position = 'fixed';
+        canvas.style.top = '0';
+        canvas.style.left = '0';
+        canvas.style.width = '100%';
+        canvas.style.height = '100%';
+        canvas.style.zIndex = '-1';
+        canvas.style.opacity = '0.05';
+        document.body.appendChild(canvas);
+
+        const ctx = canvas.getContext('2d');
+        canvas.width = window.innerWidth;
+        canvas.height = window.innerHeight;
+
+        const matrix = "ABCDEFGHIJKLMNOPQRSTUVWXYZ123456789@#$%^&*()*&^%";
+        const drops = [];
+        const fontSize = 10;
+        const columns = canvas.width / fontSize;
+
+        for(let x = 0; x < columns; x++) {
+            drops[x] = 1;
+        }
+
+        function draw() {
+            ctx.fillStyle = 'rgba(0, 0, 0, .1)';
+            ctx.fillRect(0, 0, canvas.width, canvas.height);
+            ctx.fillStyle = '#0F0';
+            ctx.font = fontSize + 'px monospace';
+
+            for(let i = 0; i < drops.length; i++) {
+                const text = matrix[Math.floor(Math.random() * matrix.length)];
+                ctx.fillText(text, i * fontSize, drops[i] * fontSize);
+                
+                if(drops[i] * fontSize > canvas.height && Math.random() > .975) {
+                    drops[i] = 0;
+                }
+                drops[i]++;
+            }
+        }
+
+        setInterval(draw, 35);
+
+        // Show About section by default
+        showSection('about');
+    </script>
+</body>
+</html>
